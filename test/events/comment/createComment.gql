@@ -1,0 +1,12 @@
+mutation {
+  createComment(commentInput:{ 
+    blogPostId: "XXX", 
+    body: "XXX", 
+    authorId: "XXX" }) {
+      body
+      author {
+        id
+        name
+      }
+  	}
+}

@@ -1,0 +1,11 @@
+{
+  getAllComments{
+    	id
+    	blogPostId
+      body
+      author {
+        id
+        name
+      }  
+  }
+}

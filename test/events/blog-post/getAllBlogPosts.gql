@@ -1,0 +1,18 @@
+{
+  getAllPosts{
+    	id
+      title
+      body
+      author {
+        id
+        name
+      }  
+    	comments {
+        body
+        author {
+          id
+          name
+        }
+      }
+  }
+}

@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  id: String!
+  body: String!
+  blogPost: BlogPost!
+  blogPostId: String!
+  author: User!
+  authorId: String!
+}
+
+type BlogPost {
+  id: String!
+  title: String!
+  body: String!
+  author: User!
+  authorId: String!
+  comments: [Comment!]
+}
+
+type User {
+  id: String!
+  name: String!
+  blogPosts: [BlogPost!]
+  comments: [Comment!]
+}
+
+type Query {
+  getAllUsers: [User!]!
+  getUser(id: String!): User!
+  getAllBlogPosts: [BlogPost!]!
+  getBlogPost(id: String!): BlogPost!
+  getAllComments: [Comment!]!
+  getComment(id: String!): Comment!
+  getCommentsForPost(id: String!): [Comment!]!
+}
+
+type Mutation {
+  createUser(userInput: UserCreateDTO!): User!
+  createBlogPost(blogPostInput: BlogPostCreateDTO!): BlogPost!
+  createComment(commentInput: CommentCreateDTO!): Comment!
+}
+
+input UserCreateDTO {
+  name: String!
+}
+
+input BlogPostCreateDTO {
+  title: String!
+  body: String!
+  authorId: String!
+}
+
+input CommentCreateDTO {
+  body: String!
+  blogPostId: String!
+  authorId: String!
+}

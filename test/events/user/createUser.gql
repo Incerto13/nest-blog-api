@@ -1,0 +1,6 @@
+mutation {
+  createUser(userInput: { name:"XXX" }){
+        id
+    	name
+  	}   
+  }

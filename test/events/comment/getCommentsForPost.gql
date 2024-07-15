@@ -1,0 +1,11 @@
+{
+  getCommentsForPost (id: "XXX"){
+      blogPostId
+    	id
+      body
+      author {
+        id
+        name
+      }  
+  }
+}

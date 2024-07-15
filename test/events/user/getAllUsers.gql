@@ -1,0 +1,16 @@
+{
+  getAllUsers {
+    id
+    name
+    posts {
+      id
+      title
+      body
+    }
+    comments {
+      id
+      postId
+      body
+    }
+  }
+}

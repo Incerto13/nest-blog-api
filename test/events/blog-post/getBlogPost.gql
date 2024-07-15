@@ -1,0 +1,19 @@
+{
+  getPost(id: "XXX"){
+    	id
+      title
+      body
+      author {
+        id
+        name
+      }  
+    	comments {
+            id
+            body
+            author {
+                id
+                name
+            }
+      }
+  }
+}

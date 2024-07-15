@@ -1,0 +1,12 @@
+mutation {
+  createPost(postInput:{ 
+    title: "XXX", 
+    body: "XXX", 
+    authorId: "XXX" }) {
+      title
+      body
+      author {
+        name
+      }
+  	}
+}
