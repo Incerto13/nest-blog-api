@@ -3,7 +3,6 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nest
 import { User } from './entity/user.entity';
 import { UserCreateDTO } from 'src/user/dto/create-user.input';
 import { UserService } from 'src/user/user.service';
-import validateUUID from 'src/utils/validateUUID';
 import { UserUpdateDTO } from './dto/update-user-input';
 
 @ApiTags('User')

@@ -3,9 +3,8 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nest
 import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
 import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
 import { BlogPostService } from 'src/blog-post/blog-post.service';
-import validateUUID from 'src/utils/validateUUID';
 import { BlogPostUpdateDTO } from './dto/update-blog-post.input';
-import { AddressValidationPipe } from 'src/pipes/authorValidationPipe';
+import { AddressValidationPipe } from 'src/pipes/author-validation-pipe';
 
 
 @ApiTags('BlogPost')
@@ -35,9 +34,7 @@ export class BlogPostController {
     @ApiOkResponse({ type: BlogPost })
     @Get(':id')
     async findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<BlogPost> {
-        if (validateUUID(id)) {
-            return await this.blogPostService.findOne(id);
-        }
+        return await this.blogPostService.findOne(id);
     }
 
     @ApiOkResponse({ type: BlogPost })

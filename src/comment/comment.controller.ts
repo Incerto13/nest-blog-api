@@ -3,8 +3,8 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nest
 import { Comment } from 'src/comment/entity/comment.entity';
 import { CommentCreateDTO } from 'src/comment/dto/create-comment.input';
 import { CommentService } from 'src/comment/comment.service';
-import validateUUID from 'src/utils/validateUUID';
 import { CommentUpdateDTO } from './dto/udpate-comment.input';
+import { AddressValidationPipe } from 'src/pipes/author-validation-pipe';
 
 
 @ApiTags('Comment')
@@ -15,7 +15,7 @@ export class CommentController {
 
     @ApiCreatedResponse({ type: Comment })
     @Post()
-    async create(@Body(ValidationPipe) post: CommentCreateDTO ): Promise<Comment> {
+    async create(@Body(ValidationPipe, AddressValidationPipe) post: CommentCreateDTO ): Promise<Comment> {
         const result = await this.commentService.create(post);
         return result;
     }
