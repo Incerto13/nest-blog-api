@@ -3,8 +3,8 @@ up-dev-db:
 	docker compose -f docker-compose.dev.yml --env-file .env.dev up -d
 
 down-dev-db:
-	docker stop blog-db pgadmin4
-	docker rm --volumes blog-db pgadmin4 
+	docker stop blog-db pgadmin4 redis-db redis-commander
+	docker rm --volumes blog-db pgadmin4 redis-db redis-commander
 
 
 # For running integration tests on local machine or github workflow

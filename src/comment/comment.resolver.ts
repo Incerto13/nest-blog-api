@@ -18,8 +18,8 @@ export class CommentResolver {
   ) { }
 
   @Mutation(() => Comment, { name: "createComment" })
-  create(@Args('commentInput') comment: CommentCreateDTO) {
-      const result = this.commentService.create(comment)
+  async create(@Args('commentInput') comment: CommentCreateDTO) {
+      const result = await this.commentService.create(comment)
       // emit notification about new blog post
       this.notificationGateway.onNewComment(comment)
       return result;
@@ -31,7 +31,7 @@ export class CommentResolver {
       const cacheKey = 'getAllComments';
       const cachedResponse = await this.cacheManager.get<string>(cacheKey);
       if (cachedResponse) {
-          return cachedResponse as unknown as Comment;
+          return cachedResponse as unknown as Comment[];
       }
 
       // query data
@@ -67,11 +67,11 @@ export class CommentResolver {
       const cacheKey = `getCommentsForPost - ${id}`;
       const cachedResponse = await this.cacheManager.get<string>(cacheKey);
       if (cachedResponse) {
-          return cachedResponse as unknown as Comment;
+          return cachedResponse as unknown as Comment[];
       }
 
       // query data
-      const response = this.commentService.findCommentsForBlogPost(id);
+      const response = await this.commentService.findCommentsForBlogPost(id);
 
       // cache acquired data
       await this.cacheManager.set(cacheKey, response)

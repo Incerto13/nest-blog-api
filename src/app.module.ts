@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule, Int } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigValidationSchema } from './config.schema';
 import { join } from 'path';
 import { CacheModule } from '@nestjs/cache-manager'
 import * as redisStore from 'cache-manager-redis-store';
@@ -13,35 +15,47 @@ import { CommentModule } from 'src/comment/comment.module';
 import { GatewayModule } from './gateway/gateway.module';
 
 
+
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: [`.env.${process.env.NODE_ENV}`],
+      validationSchema: ConfigValidationSchema,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+          type: 'postgres',
+          autoLoadEntities: true,
+          synchronize: true,
+          host: configService.get('DB_HOST'),
+          port: configService.get('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
+      })
+    }),
     CacheModule.register({
       store: redisStore,
-      host: 'localhost', // Redis host
-      port: 6379,        // Redis port
-      ttl: 600,          // Time to live in seconds
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      ttl: parseInt(process.env.DEFAULT_CACHE_TTL),
       isGlobal: true,
     }),
-    UserModule, BlogPostModule, CommentModule, GraphQLModule.forRoot(
+    UserModule, 
+    BlogPostModule, 
+    CommentModule, 
+    GatewayModule, 
+    GraphQLModule.forRoot(
     {
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       plugins: [
-        ApolloServerPluginCacheControl({ defaultMaxAge: 600 }),
+        ApolloServerPluginCacheControl({ defaultMaxAge: parseInt(process.env.DEFAULT_CACHE_TTL) }),
         responseCachePlugin()
       ],
     }
-  ),
-  GatewayModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'blog',
-      entities: ["dist/**/*.entity{.ts,.js}"],
-      synchronize: true,
-    }),],
+  )],
   controllers: [],
   providers: [],
 })

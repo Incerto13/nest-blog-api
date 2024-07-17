@@ -30,7 +30,6 @@ export class UserController {
         const cacheKey = 'getAllUsers';
         const cachedResponse = await this.cacheManager.get<string>(cacheKey);
         if (cachedResponse) {
-            console.log('cachedResponse: ', cachedResponse)
             return cachedResponse as unknown as User[];
         }
 

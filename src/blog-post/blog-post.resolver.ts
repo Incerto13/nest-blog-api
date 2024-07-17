@@ -18,8 +18,8 @@ export class BlogPostResolver {
     ) { }
 
     @Mutation(() => BlogPost, { name: "createBlogPost" })
-    create(@Args('blogPostInput') blogPost: BlogPostCreateDTO) {
-        const response = this.blogPostService.create(blogPost)
+    async create(@Args('blogPostInput') blogPost: BlogPostCreateDTO) {
+        const response = await this.blogPostService.create(blogPost)
         // emit notification about new blog post
         this.notificationGateway.onNewBlogPost(blogPost)
         return response

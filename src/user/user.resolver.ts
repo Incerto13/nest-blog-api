@@ -15,8 +15,8 @@ export class UserResolver {
   ) { }
 
   @Mutation(() => User)
-  createUser(@Args('userInput') user: UserCreateDTO) {
-    return this.userService.create(user);
+  async createUser(@Args('userInput') user: UserCreateDTO) {
+    return await this.userService.create(user);
   }
 
   @Query(() => [User], { name: 'getAllUsers' })
@@ -25,7 +25,7 @@ export class UserResolver {
       const cacheKey = 'getAllUsers';
       const cachedResponse = await this.cacheManager.get<string>(cacheKey);
       if (cachedResponse) {
-        return cachedResponse;
+        return cachedResponse as unknown as User[];
       }
 
       // query data
@@ -43,7 +43,7 @@ export class UserResolver {
       const cacheKey = `getUser - ${id}`;
       const cachedResponse = await this.cacheManager.get<string>(cacheKey);
       if (cachedResponse) {
-        return cachedResponse;
+        return cachedResponse as unknown as User;
       }
 
       // query data 
