@@ -5,21 +5,26 @@ import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
 import { BlogPostService } from 'src/blog-post/blog-post.service';
 import { BlogPostUpdateDTO } from './dto/update-blog-post.input';
 import { AddressValidationPipe } from 'src/pipes/author-validation-pipe';
+import { NotificationGateway } from 'src/gateway/gateway';
 
 
 @ApiTags('BlogPost')
 @ApiBearerAuth()
 @Controller('blog-posts')
 export class BlogPostController {
-    constructor(private readonly blogPostService: BlogPostService) { }
+    constructor(
+        private readonly blogPostService: BlogPostService,
+        private readonly notificationGateway: NotificationGateway
+    ) { }
 
     @ApiCreatedResponse({ type: BlogPost })
     @Post()
     async create(
         @Body(ValidationPipe, AddressValidationPipe) blogPost: BlogPostCreateDTO
-
     ): Promise<BlogPost> {
         const result = await this.blogPostService.create(blogPost);
+        // emit notification about each new blog post
+        this.notificationGateway.emitMessage('blogPostNotification', blogPost)
         return result;
     }
 

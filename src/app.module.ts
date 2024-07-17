@@ -10,6 +10,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { UserModule } from './user/user.module';
 import { BlogPostModule } from 'src/blog-post/blog-post.module';
 import { CommentModule } from 'src/comment/comment.module';
+import { GatewayModule } from './gateway/gateway.module';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { CommentModule } from 'src/comment/comment.module';
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql')
     }
   ),
+  GatewayModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
