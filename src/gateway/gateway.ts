@@ -5,7 +5,7 @@ import { Server, Socket } from 'socket.io'
 
 @WebSocketGateway()
 export class NotificationGateway implements OnGatewayConnection, OnGatewayDisconnect {
-
+    
     @WebSocketServer()
     server: Server
 
@@ -34,8 +34,7 @@ export class NotificationGateway implements OnGatewayConnection, OnGatewayDiscon
     }
 
     onNewComment(@MessageBody() body: any) {
-        console.log(body)
-        this.server.emit('onComment', {
+        this.emitMessage('onComment', {
             msg: 'New Comment',
             content: body,
         })
