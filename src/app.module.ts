@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLModule, Int } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { CacheModule, CacheInterceptor } from '@nestjs/cache-manager'
+import { CacheModule } from '@nestjs/cache-manager'
 import * as redisStore from 'cache-manager-redis-store';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-
+import responseCachePlugin from 'apollo-server-plugin-response-cache';
+import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/cacheControl'
 
 import { UserModule } from './user/user.module';
 import { BlogPostModule } from 'src/blog-post/blog-post.module';
@@ -24,7 +24,11 @@ import { GatewayModule } from './gateway/gateway.module';
     }),
     UserModule, BlogPostModule, CommentModule, GraphQLModule.forRoot(
     {
-      autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql')
+      autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
+      plugins: [
+        ApolloServerPluginCacheControl({ defaultMaxAge: 600 }),
+        responseCachePlugin()
+      ],
     }
   ),
   GatewayModule,
@@ -39,11 +43,6 @@ import { GatewayModule } from './gateway/gateway.module';
       synchronize: true,
     }),],
   controllers: [],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor
-    }
-  ],
+  providers: [],
 })
 export class AppModule {}

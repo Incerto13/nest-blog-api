@@ -17,7 +17,7 @@ export class NotificationGateway implements OnGatewayConnection, OnGatewayDiscon
         console.log('Client disconnected:', client.id);
       }
 
-    @SubscribeMessage('newMessage')
+    @SubscribeMessage('newMessage') // subscribe to incoming messages from users
     onNewMessage(@MessageBody() body: any) {
         console.log(body)
         this.server.emit('onMessage', {
@@ -26,10 +26,25 @@ export class NotificationGateway implements OnGatewayConnection, OnGatewayDiscon
         })
     }
 
+    onNewBlogPost(@MessageBody() body: any) {
+        this.emitMessage('onBlogPost', {
+            msg: 'New Blog Post',
+            content: body,
+        })
+    }
+
+    onNewComment(@MessageBody() body: any) {
+        console.log(body)
+        this.server.emit('onComment', {
+            msg: 'New Comment',
+            content: body,
+        })
+    }
+
     emitMessage(event: string, message: any) {
         console.log({
             event,
-            message
+            message,
         })
         this.server.emit(event, message);
     }

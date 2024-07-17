@@ -1,9 +1,12 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BlogPost } from "src/blog-post/entity/blog-post.entity"
 import { Comment } from "src/comment/entity/comment.entity"
 import { ApiProperty } from '@nestjs/swagger';
+import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
 
+
+@CacheControl({ maxAge: 600 })
 @ObjectType()
 @Entity()
 export class User {

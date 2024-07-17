@@ -6,11 +6,12 @@ import { Comment } from 'src//comment/entity/comment.entity';
 import { BlogPostModule } from 'src/blog-post/blog-post.module';
 import { UserModule } from 'src/user/user.module';
 import { CommentController } from 'src/comment/comment.controller'
+import { NotificationGateway } from 'src/gateway/gateway';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([Comment]), forwardRef(() => UserModule), forwardRef(() => BlogPostModule)],
-  providers: [CommentResolver, CommentService],
+  providers: [CommentResolver, CommentService, NotificationGateway],
   controllers: [CommentController], 
   exports: [CommentService]
 })
