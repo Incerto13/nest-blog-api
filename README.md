@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nestjs](https://github.com/nestjs/nest) application with GraphQL + Rest with caching, push notifications via websockets and integration tests
+[Nestjs](https://github.com/nestjs/nest) application with GraphQL + Rest with TypeORM, Postgres, caching, push notifications via websockets and integration tests
 
 ## Installation
 
