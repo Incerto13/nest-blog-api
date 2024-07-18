@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) Api with GraphQL + Rest with caching, push notifications and integration tests
 
 ## Installation
 
@@ -36,7 +36,7 @@ $ npm install
 #### prerequisites 
 - turn off your local postgres service i.e. `brew services stop postgresql@14`
 - turn off your local redis service i.e. `brew services stop redis`
-- tear down the `test` containers (if they are running) `$ make down-test-db`
+- tear down the `test` containers (if they are running) `make down-test-db`
 - create a `.env.dev` file in the root directory based upon the `.env.example` file
  
 ```bash
@@ -50,16 +50,15 @@ $ npm run start:dev
 #### prerequisites
 - turn off your local postgres service i.e. `brew services stop postgresql@14`
 - turn off your local redis service i.e. `brew services stop redis`
-- tear down the `dev` containers (if they are running) `$ make down-test-db`
+- tear down the `dev` containers (if they are running) `make down-dev-db`
 - create a `.env.test` file in the root directory based upon the `.env.example` file
 
 ```bash
 # stand-up test environment
 $ make up-test-db
-$ npm run start:test # api will be running on localhost:3000
+$ npm run start:test
 # open new terminal
-# run integration tests
-$ npm run test:int
+$ npm run test:int  # run integration tests
 ```
 
 ## Documentation
