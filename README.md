@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) Api with GraphQL + Rest with caching, push notifications and integration tests
+[Nestjs](https://github.com/nestjs/nest) application with GraphQL + Rest with caching, push notifications via websockets and integration tests
 
 ## Installation
 
@@ -129,5 +129,5 @@ Nest is [MIT licensed](LICENSE).
 
 -   **Custom Queries with TypeORM:** Implement optimized custom queries using TypeORM's Query Builder to fetch data based on specific criteria (e.g., filtering, pagination).
 -   **Integration Tests:** Write integration tests to validate interactions between GraphQL, WebSocket subscriptions, and TypeORM operations. ✅
--   **GraphQL Subscriptions:** Implement GraphQL subscriptions for real-time updates via WebSocket. ✅
+-   **GraphQL Subscriptions:** Implement GraphQL subscriptions for real-time updates via WebSocket.
 
