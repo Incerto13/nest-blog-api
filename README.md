@@ -33,41 +33,94 @@ $ npm install
 ```
 
 ## Running the app
-
+#### prerequisites 
+- turn off your local postgres service i.e. `brew services stop postgresql@14`
+- turn off your local redis service i.e. `brew services stop redis`
+- tear down the `test` containers (if they are running) `$ make down-test-db`
+- create a `.env.dev` file in the root directory based upon the `.env.example` file
+ 
 ```bash
 # development
-$ npm run start
-
-# watch mode
+$ make up-dev-db
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+
+## Testing
+#### prerequisites
+- turn off your local postgres service i.e. `brew services stop postgresql@14`
+- turn off your local redis service i.e. `brew services stop redis`
+- tear down the `dev` containers (if they are running) `$ make down-test-db`
+- create a `.env.test` file in the root directory based upon the `.env.example` file
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# integration tests
+$ make up-test-db
+$ npm run start:test
+# open new terminal
+$ npm run test:int
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## Requirements
+
+**Core Requirements:**
+
+1.  **Database Setup and TypeORM Migration:**
+ 
+-   Set up a PostgreSQL database for storing application data. ✅
+-   Create an initial TypeORM migration to define the database schema based on entities (User, Post, Comment) with appropriate relationships. ✅
+
+1.  **Controllers and Services:**
+
+-   Create controllers to handle HTTP requests and route them to appropriate service methods. ✅
+-   Implement services to encapsulate business logic and interact with users, posts, and comments for CRUD operations. ✅
+
+1.  **Swagger Integration:**
+
+-   Use Swagger to automatically generate API documentation for your NestJS application. ✅
+-   Document API endpoints including input/output parameters, responses, and error codes. ✅
+
+1.  **Query Caching (choose one):**
+
+-   Implement one of the following to improve performance
+
+1.  Implement server-side caching mechanisms to cache frequently requested GraphQL queries or TypeORM database queries for improved performance. ✅
+2.  Utilize caching strategies (e.g., dataloader for resolver-level caching) to minimize redundant data fetching operations.
+
+2.  **Custom Middleware (choose 2):**
+
+-   Implement two of the following to handle specific metadata, access control, data validation, and cross-cutting concerns like logging or caching
+
+1.  Custom interceptor
+2.  Custom guards 
+3.  Custom decorators ✅
+4.  Custom pipes ✅
+
+4.  **GraphQL Integration:**
+
+-   Define GraphQL schema types representing users, posts, and comments. ✅
+-   Implement GraphQL queries (**getUser, getAllUsers, getPost, getAllPosts, getCommentsForPost**) and mutations (**createUser, createPost, createComment**) to manage data. ✅
+
+1.  **Real-Time Updates with WebSockets:**
+
+-   Implement WebSocket integration (@WebSocketGateway) for real-time communication. ✅
+-   Use WebSocket events (newPost, newComment) to notify clients immediately when new posts or comments are created. ✅
+
+**Additional Requirements:**
+
+-   **User Authentication:** Implement basic authentication mechanisms using JWT for user login and access control to protected API endpoints.
+-   **Error Handling:** Ensure robust error handling and validation for GraphQL mutations and TypeORM operations. ✅
+-   **Unit Testing:** Write comprehensive unit tests (using Jest) to cover critical components, services, resolvers, and middleware functions. ✅
+-   **Documentation:** Provide clear documentation for setup, API endpoints (GraphQL, REST), WebSocket events, caching strategies, and Swagger integration. ✅
+
+**Bonuses (Optional):**
+
+-   **Custom Queries with TypeORM:** Implement optimized custom queries using TypeORM's Query Builder to fetch data based on specific criteria (e.g., filtering, pagination).
+-   **Integration Tests:** Write integration tests to validate interactions between GraphQL, WebSocket subscriptions, and TypeORM operations. ✅
+-   **GraphQL Subscriptions:** Implement GraphQL subscriptions for real-time updates via WebSocket. ✅
+
