@@ -1,8 +1,7 @@
-import { BadRequestException, Injectable, PipeTransform } from "@nestjs/common";
-import { BlogPostService } from "src/blog-post/blog-post.service";
-import { BlogPostCreateDTO } from "src/blog-post/dto/create-blog-post.input";
-import { CommentCreateDTO } from "src/comment/dto/create-comment.input";
-import { UserService } from "src/user/user.service";
+import { Injectable, PipeTransform } from "@nestjs/common";
+import { BlogPostCreateDTO } from "../../blog-post/dto/create-blog-post.input";
+import { CommentCreateDTO } from "../../comment/dto/create-comment.input";
+import { UserService } from "../../user/user.service";
 
 @Injectable()
 export class AuthorValidationPipe implements PipeTransform {

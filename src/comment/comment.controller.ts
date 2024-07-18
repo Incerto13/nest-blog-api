@@ -1,11 +1,11 @@
 import { Controller, Get, Body, Post, Param, Patch, Delete, ValidationPipe, ParseUUIDPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { Comment } from 'src/comment/entity/comment.entity';
-import { CommentCreateDTO } from 'src/comment/dto/create-comment.input';
-import { CommentService } from 'src/comment/comment.service';
+import { Comment } from './entity/comment.entity';
+import { CommentCreateDTO } from './dto/create-comment.input';
+import { CommentService } from './comment.service';
 import { CommentUpdateDTO } from './dto/udpate-comment.input';
-import { AuthorValidationPipe } from 'src/utils/pipes/author-validation-pipe';
-import { NotificationGateway } from 'src/gateway/gateway';
+import { AuthorValidationPipe } from '../utils/pipes/author-validation-pipe';
+import { NotificationGateway } from '../gateway/gateway';
 
 
 @ApiTags('Comment')

@@ -1,9 +1,9 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { BlogPost } from "src/blog-post/entity/blog-post.entity"
-import { Comment } from "src/comment/entity/comment.entity"
 import { ApiProperty } from '@nestjs/swagger';
-import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+import { BlogPost } from "../../blog-post/entity/blog-post.entity"
+import { Comment } from "../../comment/entity/comment.entity"
+import { CacheControl } from '../../utils/decorators/cache-control.decorator'
 
 
 @CacheControl({ maxAge: 600 })

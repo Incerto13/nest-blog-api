@@ -1,13 +1,10 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Comment } from 'src/comment/entity/comment.entity'
-import { BlogPostService } from 'src/blog-post/blog-post.service';
-import { UserService } from 'src/user/user.service';
-import { User } from 'src/user/entity/user.entity';
-import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
+import { Comment } from '../comment/entity/comment.entity'
+import { UserService } from '../user/user.service';
+import { User } from '../user/entity/user.entity';
 import { CommentCreateDTO } from './dto/create-comment.input';
 import { CommentUpdateDTO } from './dto/udpate-comment.input';
 

@@ -1,11 +1,11 @@
-import { Controller, Inject, Get, Body, Post, Param, Patch, Delete, ParseUUIDPipe, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param, Patch, Delete, ParseUUIDPipe, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
-import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
-import { BlogPostService } from 'src/blog-post/blog-post.service';
+import { BlogPost } from './entity/blog-post.entity';
+import { BlogPostCreateDTO } from './dto/create-blog-post.input';
+import { BlogPostService } from './blog-post.service';
 import { BlogPostUpdateDTO } from './dto/update-blog-post.input';
-import { AuthorValidationPipe } from 'src/utils/pipes/author-validation-pipe';
-import { NotificationGateway } from 'src/gateway/gateway';
+import { AuthorValidationPipe } from '../utils/pipes/author-validation-pipe';
+import { NotificationGateway } from '../gateway/gateway';
 
 
 @ApiTags('BlogPost')

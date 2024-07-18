@@ -1,13 +1,13 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
-import { BlogPostService } from 'src/blog-post/blog-post.service';
-import { BlogPostResolver } from 'src/blog-post/blog-post.resolver';
-import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
-import { UserModule} from 'src/user/user.module';
-import { CommentModule } from 'src/comment/comment.module';
-import { BlogPostController } from 'src/blog-post/blog-post.controller';
-import { NotificationGateway } from 'src/gateway/gateway';
+import { BlogPostService } from '../blog-post/blog-post.service';
+import { BlogPostResolver } from '../blog-post/blog-post.resolver';
+import { BlogPost } from '../blog-post/entity/blog-post.entity';
+import { UserModule} from '../user/user.module';
+import { CommentModule } from '../comment/comment.module';
+import { BlogPostController } from '../blog-post/blog-post.controller';
+import { NotificationGateway } from '../gateway/gateway';
 
 
 

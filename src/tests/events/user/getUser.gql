@@ -2,14 +2,14 @@
   getUser(id: "XXX"){
     id
     name
-    posts {
+    blogPosts {
       id
       title
       body
     }
     comments {
       id
-      postId
+      blogPostId
       body
     }
   }

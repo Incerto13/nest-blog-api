@@ -2,10 +2,10 @@ import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { UserCreateDTO } from 'src/user/dto/create-user.input';
+import { UserCreateDTO } from './dto/create-user.input';
 import { User } from './entity/user.entity';
 import { UserUpdateDTO } from './dto/update-user-input';
-import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+import { CacheControl } from '../utils/decorators/cache-control.decorator'
 
 
 

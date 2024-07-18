@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule, Int } from '@nestjs/graphql';
+import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigValidationSchema } from './config.schema';
@@ -19,7 +19,7 @@ import { GatewayModule } from './gateway/gateway.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.env.${process.env.NODE_ENV}`],
+      envFilePath: [`.env.${process.env.ENV}`],
       validationSchema: ConfigValidationSchema,
     }),
     TypeOrmModule.forRootAsync({

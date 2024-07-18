@@ -1,10 +1,10 @@
 import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
-import { CommentService } from 'src/comment/comment.service'
-import { Comment } from 'src/comment/entity/comment.entity';
-import { User } from 'src/user/entity/user.entity';
+import { CommentService } from '../comment/comment.service'
+import { Comment } from '../comment/entity/comment.entity';
+import { User } from '../user/entity/user.entity';
 import { CommentCreateDTO } from './dto/create-comment.input';
-import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
-import { NotificationGateway } from 'src/gateway/gateway';
+import { CacheControl } from '../utils/decorators/cache-control.decorator'
+import { NotificationGateway } from '../gateway/gateway';
 
 
 @Resolver(() => Comment)

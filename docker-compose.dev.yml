@@ -1,6 +1,6 @@
 
 services:
-  db:
+  blog-db:
     image: postgres
     container_name: blog-db
     restart: always
@@ -13,7 +13,7 @@ services:
       
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4
+    container_name: pgadmin
     restart: always
     ports:
       - "${PGADMIN_PORT}:80"

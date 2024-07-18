@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { User } from 'src/user/entity/user.entity';
-import { UserCreateDTO } from 'src/user/dto/create-user.input';
-import { UserService } from 'src/user/user.service';
-import { UserUpdateDTO } from 'src/user/dto/update-user-input';
+import { User } from './entity/user.entity';
+import { UserCreateDTO } from './dto/create-user.input';
+import { UserService } from './user.service';
+import { UserUpdateDTO } from './dto/update-user-input';
 
 @ApiTags('User')
 @ApiBearerAuth()

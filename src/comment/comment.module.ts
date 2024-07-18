@@ -1,13 +1,13 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
-import { CommentService } from 'src/comment/comment.service';
-import { CommentResolver } from 'src/comment/comment.resolver';
-import { Comment } from 'src/comment/entity/comment.entity';
-import { BlogPostModule } from 'src/blog-post/blog-post.module';
-import { UserModule } from 'src/user/user.module';
-import { CommentController } from 'src/comment/comment.controller'
-import { NotificationGateway } from 'src/gateway/gateway';
+import { CommentService } from '../comment/comment.service';
+import { CommentResolver } from '../comment/comment.resolver';
+import { Comment } from '../comment/entity/comment.entity';
+import { BlogPostModule } from '../blog-post/blog-post.module';
+import { UserModule } from '../user/user.module';
+import { CommentController } from '../comment/comment.controller'
+import { NotificationGateway } from '../gateway/gateway';
 
 
 

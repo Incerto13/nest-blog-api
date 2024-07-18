@@ -2,14 +2,14 @@ import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { UserService } from 'src/user/user.service';
-import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
-import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
-import { User } from 'src/user/entity/user.entity';
-import { CommentService } from 'src/comment/comment.service';
-import { Comment } from 'src/comment/entity/comment.entity'
-import { BlogPostUpdateDTO } from 'src/blog-post/dto/update-blog-post.input';
-import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+import { UserService } from '../user/user.service';
+import { BlogPost } from '../blog-post/entity/blog-post.entity';
+import { BlogPostCreateDTO } from '../blog-post/dto/create-blog-post.input';
+import { User } from '../user/entity/user.entity';
+import { CommentService } from '../comment/comment.service';
+import { Comment } from '../comment/entity/comment.entity'
+import { BlogPostUpdateDTO } from '../blog-post/dto/update-blog-post.input';
+import { CacheControl } from '../utils/decorators/cache-control.decorator'
 
 
 

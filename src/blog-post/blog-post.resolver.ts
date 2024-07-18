@@ -1,10 +1,10 @@
 import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
-import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
-import { BlogPostService } from 'src/blog-post/blog-post.service';
-import { BlogPost } from 'src/blog-post/entity/blog-post.entity'
-import { User } from 'src/user/entity/user.entity';
-import { NotificationGateway } from 'src/gateway/gateway';
-import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+import { BlogPostCreateDTO } from '../blog-post/dto/create-blog-post.input';
+import { BlogPostService } from '../blog-post/blog-post.service';
+import { BlogPost } from '../blog-post/entity/blog-post.entity'
+import { User } from '../user/entity/user.entity';
+import { NotificationGateway } from '../gateway/gateway';
+import { CacheControl } from '../utils/decorators/cache-control.decorator'
 
 
 @Resolver(() => BlogPost)
