@@ -44,7 +44,7 @@ $ npm install
 $ make up-dev-db
 $ npm run start:dev
 ```
-
+- api will be running on `localhost:3000`
 
 ## Testing
 #### prerequisites
@@ -54,12 +54,20 @@ $ npm run start:dev
 - create a `.env.test` file in the root directory based upon the `.env.example` file
 
 ```bash
-# integration tests
+# stand-up test environment
 $ make up-test-db
-$ npm run start:test
+$ npm run start:test # api will be running on localhost:3000
 # open new terminal
+# run integration tests
 $ npm run test:int
 ```
+
+## Documentation
+### GraphQL
+graphql playground: `localhost:3000/graphql`
+### REST
+swagger: `localhost:3000/rest`
+
 
 ## License
 
