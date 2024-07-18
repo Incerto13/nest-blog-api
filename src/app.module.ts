@@ -36,26 +36,33 @@ import { GatewayModule } from './gateway/gateway.module';
           database: configService.get('DB_DATABASE'),
       })
     }),
-    CacheModule.register({
-      store: redisStore,
-      host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
-      ttl: parseInt(process.env.DEFAULT_CACHE_TTL),
-      isGlobal: true,
-    }),
-    UserModule, 
-    BlogPostModule, 
-    CommentModule, 
-    GatewayModule, 
-    GraphQLModule.forRoot(
-    {
-      autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
-      plugins: [
-        ApolloServerPluginCacheControl({ defaultMaxAge: parseInt(process.env.DEFAULT_CACHE_TTL) }),
-        responseCachePlugin()
-      ],
-    }
-  )],
+      GraphQLModule.forRootAsync({
+        imports: [ConfigModule],
+        inject: [ConfigService],
+        useFactory: async (configService: ConfigService) => ({
+          autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
+          plugins: [
+            ApolloServerPluginCacheControl({ defaultMaxAge: configService.get('DEFAULT_CACHE_TTL') }),
+            responseCachePlugin()
+          ],
+        })
+      }),
+      UserModule, 
+      BlogPostModule, 
+      CommentModule, 
+      GatewayModule, 
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        store: redisStore,
+        host: configService.get('REDIS_HOST'),
+        port: configService.get('REDIS_PORT'),
+        ttl: configService.get('DEFAULT_CACHE_TTL'),
+        isGlobal: true,
+      })
+    })
+  ],
   controllers: [],
   providers: [],
 })

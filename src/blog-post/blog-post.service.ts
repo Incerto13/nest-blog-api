@@ -1,19 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { UserService } from 'src/user/user.service';
 import { BlogPost } from 'src/blog-post/entity/blog-post.entity';
 import { BlogPostCreateDTO } from 'src/blog-post/dto/create-blog-post.input';
 import { User } from 'src/user/entity/user.entity';
 import { CommentService } from 'src/comment/comment.service';
 import { Comment } from 'src/comment/entity/comment.entity'
-import { BlogPostUpdateDTO } from './dto/update-blog-post.input';
+import { BlogPostUpdateDTO } from 'src/blog-post/dto/update-blog-post.input';
+import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+
 
 
 @Injectable()
+@CacheControl({})
 export class BlogPostService {
 
-    constructor(@InjectRepository(BlogPost) private blogPostRepository: Repository<BlogPost>,
+    constructor(
+        @InjectRepository(BlogPost) private blogPostRepository: Repository<BlogPost>,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
         private userService: UserService,
         private commentService: CommentService,
     ) { }
@@ -25,7 +31,20 @@ export class BlogPostService {
     }
 
     async findAll(): Promise<BlogPost[]> {
-        return this.blogPostRepository.find({ relations: ['author', 'comments'] });
+        // use cache if present
+        const cacheKey = 'getAllBlogPosts';
+        const cachedResponse = await this.cacheManager.get<string>(cacheKey);
+        if (cachedResponse) {
+            return cachedResponse as unknown as BlogPost[];
+        }
+
+        // query data
+        const response = await this.blogPostRepository.find({ relations: ['author', 'comments'] });
+
+        // cache acquired data
+        await this.cacheManager.set(cacheKey, response);
+
+        return response;
     }
 
     async findOne(id: string): Promise<BlogPost> {

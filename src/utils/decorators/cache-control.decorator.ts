@@ -6,7 +6,7 @@ interface CacheControlOptions {
     inheritMaxAge?: boolean;
 }
 
-export const CacheControl = ({ maxAge, scope = 'PUBLIC', inheritMaxAge }: CacheControlOptions) => {
+export const CacheControl = ({ maxAge, scope = 'PUBLIC', inheritMaxAge=true }: CacheControlOptions) => {
     const args = [
         `scope: ${scope}`,
         maxAge !== undefined ? `maxAge: ${maxAge}` : null,

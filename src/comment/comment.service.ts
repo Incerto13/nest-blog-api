@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Comment } from 'src/comment/entity/comment.entity'
 import { BlogPostService } from 'src/blog-post/blog-post.service';
 import { UserService } from 'src/user/user.service';
@@ -14,9 +15,10 @@ import { CommentUpdateDTO } from './dto/udpate-comment.input';
 @Injectable()
 export class CommentService {
 
-    constructor(@InjectRepository(Comment) 
-    private commentRepository: Repository<Comment>,
-    private userService: UserService,
+    constructor(
+        @InjectRepository(Comment) private commentRepository: Repository<Comment>,
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
+        private userService: UserService,
     ) { }
 
     async create(comment: CommentCreateDTO): Promise<Comment> {
@@ -26,7 +28,20 @@ export class CommentService {
     }
 
     async findAll(): Promise<Comment[]> {
-        return this.commentRepository.find({ relations: ['author'] });
+        // use cache if present
+        const cacheKey = 'getAllComments'
+        const cachedResponse = await this.cacheManager.get<string>(cacheKey);
+        if (cachedResponse) {
+            return cachedResponse as unknown as Comment[];
+        }
+
+        // query data
+        const response = await this.commentRepository.find({ relations: ['author'] });
+
+        // cache acquired data
+        await this.cacheManager.set(cacheKey, response);
+
+        return response;
     }
 
     async findOne(id: string): Promise<Comment> {
@@ -64,4 +79,8 @@ export class CommentService {
     async getAuthor(id: string): Promise<User> {
         return this.userService.findOne(id)
     }
+
+    // async findCommentsByAuthor(id: string): Promise<Comment[]> {
+    //     return this.commentRepository.find({ authorId: id });
+    // }
 }

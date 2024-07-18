@@ -1,14 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { UserCreateDTO } from 'src/user/dto/create-user.input';
 import { User } from './entity/user.entity';
 import { UserUpdateDTO } from './dto/update-user-input';
+import { CacheControl } from 'src/utils/decorators/cache-control.decorator'
+
+
 
 @Injectable()
+@CacheControl({})
 export class UserService {
 
-  constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) { }
 
   async create(user: UserCreateDTO): Promise<User> {
     let newUser = this.userRepository.create(user);
@@ -16,9 +24,22 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userRepository.find({
+    // use cache if present
+    const cacheKey = 'getAllUsers';
+    const cachedResponse = await this.cacheManager.get<string>(cacheKey);
+    if (cachedResponse) {
+        return cachedResponse as unknown as User[];
+    }
+
+    // query data
+    const response = this.userRepository.find({
       relations: ['blogPosts', 'comments']
     });
+
+    // cache acquired data
+    await this.cacheManager.set(cacheKey, response);
+
+    return response;
   }
 
   async findOne(id: string): Promise<User> {

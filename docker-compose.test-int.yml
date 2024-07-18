@@ -20,3 +20,20 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: postgres@solace.com
       PGADMIN_DEFAULT_PASSWORD: postgres
+
+  redis-db:
+    container_name: redis-db
+    image: redis
+    environment:
+      REDIS_PORT: ${REDIS_PORT}
+    ports:
+      - 6379:6379
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: ghcr.io/joeferner/redis-commander:latest
+    environment:
+      REDIS_HOSTS: "local:${REDIS_COMMANDER_HOST}:${REDIS_PORT}"
+    ports:
+      - "8081:8081"
