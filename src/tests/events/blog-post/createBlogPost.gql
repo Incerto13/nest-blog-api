@@ -1,5 +1,5 @@
 mutation {
-  createPost(postInput:{ 
+  createBlogPost(blogPostInput:{ 
     title: "XXX", 
     body: "XXX", 
     authorId: "XXX" }) {

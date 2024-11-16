@@ -1,4 +1,4 @@
-{
+query {
   getCommentsForPost (id: "XXX"){
       blogPostId
     	id

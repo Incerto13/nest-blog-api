@@ -3,7 +3,7 @@ import { CommentService } from '../comment/comment.service'
 import { Comment } from '../comment/entity/comment.entity';
 import { User } from '../user/entity/user.entity';
 import { CommentCreateDTO } from './dto/create-comment.input';
-import { CacheControl } from '../utils/decorators/cache-control.decorator'
+// import { CacheControl } from '../utils/decorators/cache-control.decorator'
 import { NotificationGateway } from '../gateway/gateway';
 
 
@@ -37,7 +37,7 @@ export class CommentResolver {
       return this.commentService.findCommentsForBlogPost(id);
   }
 
-  @CacheControl({})
+//   @CacheControl({})
   @ResolveField(() => User)
   author(@Parent() comment: Comment) {
       return this.commentService.getAuthor(comment.authorId)

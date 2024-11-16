@@ -14,3 +14,4 @@ up-test-db:
 down-test-db:
 	docker stop blog-db_test-int pgadmin_test-int redis-db_test-int redis-commander_test-int
 	docker rm --volumes blog-db_test-int pgadmin_test-int redis-db_test-int redis-commander_test-int
+
