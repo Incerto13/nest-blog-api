@@ -26,5 +26,4 @@ jobs:
         run: |
           bash build-docker.sh
           docker push incerto13/nest-blog-api_postgres:prod-latest 
-          docker push incerto13/nest-blog-api_server:prod-latest 
-          docker push incerto13/nest-blog-api_web:prod-latest
+          docker push incerto13/nest-blog-api_server:prod-latest
