@@ -3,12 +3,12 @@ import { ApiProperty } from "@nestjs/swagger"
 import { User } from "../../user/entity/user.entity"
 import { BlogPost } from "../../blog-post/entity/blog-post.entity"
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { CacheControl } from '../../utils/decorators/cache-control.decorator'
+// import { CacheControl } from '../../utils/decorators/cache-control.decorator'
 
 
-@CacheControl({ maxAge: 600 })
+// @CacheControl({ maxAge: 600 })
 @ObjectType()
-@Entity()
+@Entity('comments')
 export class Comment {
     @Field()
     @PrimaryGeneratedColumn('uuid')

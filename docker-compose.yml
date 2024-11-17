@@ -1,0 +1,19 @@
+# build images during github workflow that pushes (w/ tags) to docker hub
+# should only need to push images for postgres and server
+
+
+services:
+
+  nest-blog-api_postgres:
+    image: incerto13/nest-blog-api_postgres:${ENV}-latest
+    container_name: nest-blog-api_postgres
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile   
+
+  nest-blog-api_server:
+    image: incerto13/nest-blog-api_server:${ENV}-latest
+    container_name: nest-blog-api_server
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile

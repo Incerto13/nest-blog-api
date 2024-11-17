@@ -1,5 +1,5 @@
-{
-  getPost(id: "XXX"){
+query {
+  getBlogPost(id: "XXX"){
     	id
       title
       body

@@ -5,12 +5,12 @@ import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { UserCreateDTO } from './dto/create-user.input';
 import { User } from './entity/user.entity';
 import { UserUpdateDTO } from './dto/update-user-input';
-import { CacheControl } from '../utils/decorators/cache-control.decorator'
+// import { CacheControl } from '../utils/decorators/cache-control.decorator'
 
 
 
 @Injectable()
-@CacheControl({})
+// @CacheControl({})
 export class UserService {
 
   constructor(

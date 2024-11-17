@@ -14,7 +14,7 @@ import { CacheControl } from '../utils/decorators/cache-control.decorator'
 
 
 @Injectable()
-@CacheControl({})
+// @CacheControl({})
 export class BlogPostService {
 
     constructor(

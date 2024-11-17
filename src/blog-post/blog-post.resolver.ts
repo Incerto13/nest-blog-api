@@ -4,7 +4,7 @@ import { BlogPostService } from '../blog-post/blog-post.service';
 import { BlogPost } from '../blog-post/entity/blog-post.entity'
 import { User } from '../user/entity/user.entity';
 import { NotificationGateway } from '../gateway/gateway';
-import { CacheControl } from '../utils/decorators/cache-control.decorator'
+// import { CacheControl } from '../utils/decorators/cache-control.decorator';
 
 
 @Resolver(() => BlogPost)
@@ -33,13 +33,13 @@ export class BlogPostResolver {
         return this.blogPostService.findOne(id)
     }
 
-    @CacheControl({})
+    // @CacheControl({})
     @ResolveField(() => Comment)
     comments(@Parent() blogPost: BlogPost) {
         return this.blogPostService.getComments(blogPost.id)
     }
 
-    @CacheControl({})
+    // @CacheControl({})
     @ResolveField(() => User)
     author(@Parent() blogPost: BlogPost) {
         return this.blogPostService.getAuthor(blogPost.authorId)

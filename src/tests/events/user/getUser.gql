@@ -1,4 +1,4 @@
-{
+query {
   getUser(id: "XXX"){
     id
     name

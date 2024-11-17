@@ -1,5 +1,5 @@
-{
-  getAllPosts{
+query {
+  getAllBlogPosts{
     	id
       title
       body

@@ -3,12 +3,12 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { BlogPost } from "../../blog-post/entity/blog-post.entity"
 import { Comment } from "../../comment/entity/comment.entity"
-import { CacheControl } from '../../utils/decorators/cache-control.decorator'
+// import { CacheControl } from '../../utils/decorators/cache-control.decorator'
 
 
-@CacheControl({ maxAge: 600 })
+// @CacheControl({ maxAge: 600 })
 @ObjectType()
-@Entity()
+@Entity('users')
 export class User {
 
   @Field()

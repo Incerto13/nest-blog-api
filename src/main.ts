@@ -8,13 +8,13 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Blog API')
-    .setDescription('This is the Intel 471 Blog Rest API')
+    .setDescription('This is a Nest.js Blog Rest and Graphql API')
     .setVersion('1.0')
     .addTag('')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('rest', app, document);
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();
